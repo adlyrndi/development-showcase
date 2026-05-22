@@ -1,0 +1,234 @@
+.experience__header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.experience__label {
+  display: inline-block;
+  font-size: var(--fs-small);
+  color: var(--accent-primary);
+  margin-bottom: 16px;
+  letter-spacing: 0.05em;
+}
+
+.experience__title {
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+}
+
+/* ---- Timeline ---- */
+.experience__timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.experience__line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--bg-tertiary);
+  transform: translateX(-50%);
+}
+
+.experience__line-fill {
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-primary);
+  transform-origin: top;
+}
+
+/* ---- Item ---- */
+.experience__item {
+  position: relative;
+  width: 50%;
+  padding-bottom: 50px;
+}
+
+.experience__item--left {
+  padding-right: 50px;
+  text-align: right;
+}
+
+.experience__item--right {
+  margin-left: 50%;
+  padding-left: 50px;
+}
+
+/* ---- Dot ---- */
+.experience__dot {
+  position: absolute;
+  top: 32px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 3px solid var(--accent-primary);
+  z-index: 2;
+}
+
+.experience__item--left .experience__dot {
+  right: -8px;
+}
+
+.experience__item--right .experience__dot {
+  left: -8px;
+}
+
+.experience__dot--active {
+  background: var(--accent-primary);
+  box-shadow: 0 0 16px var(--accent-glow), 0 0 32px var(--accent-glow);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 16px var(--accent-glow); }
+  50% { box-shadow: 0 0 24px var(--accent-glow), 0 0 48px var(--accent-glow); }
+}
+
+/* ---- Card ---- */
+.experience__card {
+  padding: 28px;
+}
+
+.experience__card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.experience__item--left .experience__card-header {
+  justify-content: flex-end;
+}
+
+.experience__period {
+  font-size: var(--fs-caption);
+  color: var(--accent-primary);
+  letter-spacing: 0.05em;
+}
+
+.experience__badge {
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.experience__role {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  margin-bottom: 4px;
+}
+
+.experience__company {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.experience__desc {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+  margin-bottom: 14px;
+}
+
+.experience__achievements {
+  margin-bottom: 16px;
+}
+
+.experience__achievement {
+  font-size: var(--fs-small);
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+  padding-left: 18px;
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.experience__item--left .experience__achievement {
+  padding-left: 0;
+  padding-right: 18px;
+}
+
+.experience__achievement::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent-primary);
+}
+
+.experience__item--left .experience__achievement::before {
+  left: auto;
+  right: 0;
+}
+
+.experience__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.experience__item--left .experience__tags {
+  justify-content: flex-end;
+}
+
+.experience__tag {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.7rem;
+  color: var(--accent-secondary);
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .experience__line {
+    left: 20px;
+  }
+
+  .experience__item {
+    width: 100%;
+    padding-left: 50px !important;
+    padding-right: 0 !important;
+    text-align: left !important;
+  }
+
+  .experience__item--right {
+    margin-left: 0;
+  }
+
+  .experience__item--left .experience__dot,
+  .experience__item--right .experience__dot {
+    left: 12px;
+    right: auto;
+  }
+
+  .experience__item--left .experience__card-header {
+    justify-content: flex-start;
+  }
+
+  .experience__item--left .experience__achievement {
+    padding-left: 18px;
+    padding-right: 0;
+  }
+
+  .experience__item--left .experience__achievement::before {
+    left: 0;
+    right: auto;
+  }
+
+  .experience__item--left .experience__tags {
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,135 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-sticky);
+  padding: 20px 0;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.navbar--scrolled {
+  padding: 12px 0;
+  background: rgba(6, 6, 11, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__logo {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: var(--fw-bold);
+  display: flex;
+  gap: 2px;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.navbar__logo:hover {
+  transform: scale(1.05);
+}
+
+.navbar__logo-bracket {
+  color: var(--accent-primary);
+}
+
+.navbar__logo-name {
+  color: var(--text-primary);
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.navbar__link {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  position: relative;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.navbar__link:hover {
+  color: var(--text-primary);
+}
+
+.navbar__link:hover::after {
+  width: 100%;
+}
+
+.navbar__cta {
+  padding: 10px 24px;
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: white;
+  transition: all var(--duration-fast) var(--ease-out);
+  box-shadow: 0 0 0 0 var(--accent-glow);
+}
+
+.navbar__cta:hover {
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-glow-sm);
+  transform: translateY(-2px);
+}
+
+.navbar__toggle {
+  display: none;
+  color: var(--text-primary);
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 768px) {
+  .navbar__toggle {
+    display: flex;
+    z-index: 10;
+  }
+
+  .navbar__links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--glass-border);
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    transform: translateX(100%);
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  .navbar__links--open {
+    transform: translateX(0);
+  }
+
+  .navbar__link {
+    font-size: 1.125rem;
+  }
+
+  .navbar__cta-wrapper {
+    margin-top: 16px;
+  }
+}
