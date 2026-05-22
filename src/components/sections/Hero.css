@@ -149,6 +149,17 @@
   margin: 0 auto 40px;
 }
 
+.hero__role-wrapper {
+  display: inline-grid;
+  vertical-align: baseline;
+}
+
+.hero__role {
+  grid-area: 1 / 1;
+  will-change: transform, opacity;
+  white-space: nowrap;
+}
+
 /* ---- CTA ---- */
 .hero__cta {
   display: flex;

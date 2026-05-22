@@ -13,6 +13,41 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollIndicatorRef = useRef<HTMLDivElement>(null);
   const orbsRef = useRef<HTMLDivElement>(null);
+  const roleRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  const roles = ['Software Engineer', 'Fullstack Developer', 'Mobile Developer'];
+
+  // Role text rotation — all roles are stacked via CSS grid,
+  // so container width = widest text. Zero layout shift.
+  useEffect(() => {
+    // Initial state: first visible, rest hidden
+    roleRefs.current.forEach((el, i) => {
+      if (el) gsap.set(el, { opacity: i === 0 ? 1 : 0, y: i === 0 ? 0 : 10 });
+    });
+
+    let currentIdx = 0;
+    const interval = setInterval(() => {
+      const outEl = roleRefs.current[currentIdx];
+      const nextIdx = (currentIdx + 1) % roles.length;
+      const inEl = roleRefs.current[nextIdx];
+
+      // Slide out
+      if (outEl) {
+        gsap.to(outEl, { y: -12, opacity: 0, duration: 0.35, ease: 'power2.in' });
+      }
+      // Slide in (with slight delay for overlap)
+      if (inEl) {
+        gsap.fromTo(inEl,
+          { y: 12, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.45, ease: 'power2.out', delay: 0.2 }
+        );
+      }
+
+      currentIdx = nextIdx;
+    }, 3200);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -124,8 +159,19 @@ export default function Hero() {
         </h1>
 
         <p className="hero__subtitle" ref={subtitleRef}>
-          <span className="gradient-text">Fullstack Developer</span> who builds
-          performant web apps & trading systems with modern technologies.
+          A{' '}
+          <span className="hero__role-wrapper">
+            {roles.map((role, i) => (
+              <span
+                key={role}
+                ref={(el) => { roleRefs.current[i] = el; }}
+                className="gradient-text hero__role"
+              >
+                {role}
+              </span>
+            ))}
+          </span>{' '}
+          who builds performant web apps &amp; trading systems with modern technologies.
         </p>
 
         <div className="hero__cta" ref={ctaRef}>
