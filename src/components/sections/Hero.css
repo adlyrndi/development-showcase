@@ -20,10 +20,6 @@
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.3;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
 }
 
 .hero__orb--1 {
@@ -54,20 +50,47 @@
 }
 
 @keyframes orbFloat1 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  33% { transform: translate3d(-40px, 30px, 0) scale(1.05); }
-  66% { transform: translate3d(20px, -20px, 0) scale(0.95); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(-40px, 30px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(20px, -20px) scale(0.95);
+  }
 }
 
 @keyframes orbFloat2 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  33% { transform: translate3d(30px, -40px, 0) scale(1.08); }
-  66% { transform: translate3d(-20px, 15px, 0) scale(0.92); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -40px) scale(1.08);
+  }
+
+  66% {
+    transform: translate(-20px, 15px) scale(0.92);
+  }
 }
 
 @keyframes orbFloat3 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(-30px, -30px, 0) scale(1.1); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-30px, -30px) scale(1.1);
+  }
 }
 
 /* ---- Grid Background ---- */
@@ -243,13 +266,27 @@
 }
 
 @keyframes scrollBounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(8px); }
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
 }
 
 @keyframes scrollWheel {
-  0% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(8px); }
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
 }
 
 /* ---- Responsive ---- */
@@ -258,7 +295,18 @@
     display: none;
   }
 
-  .hero__orb--1 { width: 300px; height: 300px; }
-  .hero__orb--2 { width: 200px; height: 200px; }
-  .hero__orb--3 { width: 150px; height: 150px; }
+  .hero__orb--1 {
+    width: 300px;
+    height: 300px;
+  }
+
+  .hero__orb--2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero__orb--3 {
+    width: 150px;
+    height: 150px;
+  }
 }

@@ -2,7 +2,8 @@
    DESIGN SYSTEM — Portfolio
    ============================================ */
 
-
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ---- CSS Variables ---- */
 :root {
@@ -108,7 +109,8 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: auto; /* Lenis handles smooth scroll */
+  scroll-behavior: auto;
+  /* Lenis handles smooth scroll */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -230,8 +232,8 @@ ol {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   transition: border-color var(--duration-normal) var(--ease-out),
-              box-shadow var(--duration-normal) var(--ease-out),
-              transform var(--duration-normal) var(--ease-out);
+    box-shadow var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out);
 }
 
 .glass-card:hover {
@@ -242,6 +244,7 @@ ol {
 
 /* ---- Animations — Reduced Motion ---- */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

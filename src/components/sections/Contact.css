@@ -15,9 +15,6 @@
   border-radius: 50%;
   filter: blur(120px);
   opacity: 0.15;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
 }
 
 .contact__orb--1 {
@@ -97,7 +94,7 @@
   color: var(--text-primary);
   font-size: var(--fs-body);
   transition: border-color var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
+    box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .contact__input:focus {
@@ -122,13 +119,13 @@
   background: transparent;
 }
 
-.contact__textarea ~ .contact__label-float {
+.contact__textarea~.contact__label-float {
   top: 18px;
   transform: none;
 }
 
-.contact__input:focus ~ .contact__label-float,
-.contact__input:not(:placeholder-shown) ~ .contact__label-float {
+.contact__input:focus~.contact__label-float,
+.contact__input:not(:placeholder-shown)~.contact__label-float {
   top: -8px;
   left: 14px;
   transform: none;
@@ -138,8 +135,8 @@
   padding: 0 6px;
 }
 
-.contact__textarea:focus ~ .contact__label-float,
-.contact__textarea:not(:placeholder-shown) ~ .contact__label-float {
+.contact__textarea:focus~.contact__label-float,
+.contact__textarea:not(:placeholder-shown)~.contact__label-float {
   top: -8px;
   left: 14px;
   transform: none;
@@ -191,7 +188,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ---- Info Cards ---- */
@@ -255,8 +254,17 @@
 }
 
 @keyframes availPulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-  50% { opacity: 0.7; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+  }
+
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
 }
 
 /* ---- Responsive ---- */
