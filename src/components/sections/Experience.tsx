@@ -1,12 +1,23 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger } from '../../hooks/useGsap';
-import { experiences } from '../../data/experience';
+import { experiences as mockExperiences } from '../../data/experience';
+import type { Experience } from '../../data/experience';
+import { getExperiences } from '../../utils/sanity';
 import './Experience.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Experience() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [experienceList, setExperienceList] = useState<Experience[]>(mockExperiences);
+
+  useEffect(() => {
+    async function fetchSanityExperiences() {
+      const data = await getExperiences();
+      setExperienceList(data);
+    }
+    fetchSanityExperiences();
+  }, []);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -91,7 +102,7 @@ export default function Experience() {
             <div className="experience__line-fill" />
           </div>
 
-          {experiences.map((exp, index) => (
+          {experienceList.map((exp, index) => (
             <div
               key={exp.id}
               className={`experience__item ${

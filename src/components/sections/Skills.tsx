@@ -1,6 +1,8 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger } from '../../hooks/useGsap';
-import { skillCategories } from '../../data/skills';
+import { skillCategories as mockSkills } from '../../data/skills';
+import type { SkillCategory } from '../../data/skills';
+import { getSkills } from '../../utils/sanity';
 import { Monitor, Server, Database, Settings } from 'lucide-react';
 import './Skills.css';
 
@@ -15,6 +17,15 @@ const iconMap: Record<string, React.ElementType> = {
 
 export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [categoriesList, setCategoriesList] = useState<SkillCategory[]>(mockSkills);
+
+  useEffect(() => {
+    async function fetchSanitySkills() {
+      const data = await getSkills();
+      setCategoriesList(data);
+    }
+    fetchSanitySkills();
+  }, []);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -80,7 +91,7 @@ export default function Skills() {
         </div>
 
         <div className="skills__grid">
-          {skillCategories.map((category) => {
+          {categoriesList.map((category) => {
             const Icon = iconMap[category.icon] || Monitor;
             return (
               <div key={category.title} className="skills__card glass-card">

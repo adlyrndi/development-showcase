@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger } from '../../hooks/useGsap';
-import { projects, categories } from '../../data/projects';
+import { projects as mockProjects, categories } from '../../data/projects';
+import type { Project } from '../../data/projects';
+import { getProjects } from '../../utils/sanity';
 import { ExternalLink, Github, ArrowUpRight } from 'lucide-react';
 import './Projects.css';
 
@@ -8,17 +10,27 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [projectList, setProjectList] = useState<Project[]>(mockProjects);
   const [activeFilter, setActiveFilter] = useState<string>('All');
 
   // Separate featured and other projects
-  const featuredProjects = projects.filter((p) => p.featured);
+  const featuredProjects = projectList.filter((p) => p.featured);
   
   // Non-featured projects filtered by active tab
-  const filteredOtherProjects = projects.filter((p) => {
+  const filteredOtherProjects = projectList.filter((p) => {
     if (p.featured) return false;
     if (activeFilter === 'All') return true;
     return p.category.toLowerCase() === activeFilter.toLowerCase();
   });
+
+  // Fetch projects from Sanity API
+  useEffect(() => {
+    async function fetchSanityProjects() {
+      const data = await getProjects();
+      setProjectList(data);
+    }
+    fetchSanityProjects();
+  }, []);
 
   // Interactive 3D Mockup Tilt Effect using GSAP
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
