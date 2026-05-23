@@ -42,7 +42,7 @@ export default function Navbar() {
           }}
         >
           <span className="navbar__logo-bracket">&lt;</span>
-          <span className="navbar__logo-name">AR</span>
+          <span className="navbar__logo-name">codebyAdly</span>
           <span className="navbar__logo-bracket">/&gt;</span>
         </a>
 

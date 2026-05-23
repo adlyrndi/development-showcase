@@ -139,7 +139,13 @@ export async function getProfile() {
       linkedinUrl
     }`;
     const data = await sanityClient.fetch(query);
-    return data ? { ...defaultProfile, ...data } : defaultProfile;
+    if (!data) return defaultProfile;
+
+    return {
+      ...defaultProfile,
+      ...data,
+      aboutImage: data.aboutImage || defaultProfile.aboutImage,
+    };
   } catch (error) {
     console.error('Error fetching profile from Sanity, falling back:', error);
     return defaultProfile;

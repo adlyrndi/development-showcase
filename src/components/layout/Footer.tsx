@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="footer__brand">
             <a href="#" className="footer__logo" onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}>
               <span className="footer__logo-bracket">&lt;</span>
-              <span className="footer__logo-name">AR</span>
+              <span className="footer__logo-name">codebyAdly</span>
               <span className="footer__logo-bracket">/&gt;</span>
             </a>
             <p className="footer__tagline">
@@ -19,13 +19,13 @@ export default function Footer() {
           </div>
 
           <div className="footer__socials">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="GitHub">
+            <a href="https://github.com/adlyrndi" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="GitHub">
               <Github size={20} />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/adly-renadi-raksanagara-3a52a8209/" target="_blank" rel="noopener noreferrer" className="footer__social-link" aria-label="LinkedIn">
               <Linkedin size={20} />
             </a>
-            <a href="mailto:hello@adlyrenadi.dev" className="footer__social-link" aria-label="Email">
+            <a href="adlyyrr12@gmail.com" className="footer__social-link" aria-label="Email">
               <Mail size={20} />
             </a>
           </div>
