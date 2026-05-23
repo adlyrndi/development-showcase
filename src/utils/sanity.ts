@@ -18,7 +18,7 @@ export const sanityClient = isSanityConfigured
       projectId,
       dataset,
       apiVersion,
-      useCdn: true, // true for fast edge caching
+      useCdn: false, // false for instant real-time data updates without CDN cache delay
     })
   : null;
 
