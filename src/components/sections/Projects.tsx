@@ -20,6 +20,100 @@ export default function Projects() {
     return p.category.toLowerCase() === activeFilter.toLowerCase();
   });
 
+  // Interactive 3D Mockup Tilt Effect using GSAP
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const wrapper = container.querySelector('.projects__featured-image-wrapper') as HTMLDivElement;
+    const img = container.querySelector('img') as HTMLImageElement;
+    const glow = container.querySelector('.projects__featured-image-glow') as HTMLDivElement;
+    
+    if (!wrapper || !img || !glow) return;
+    
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const xc = rect.width / 2;
+    const yc = rect.height / 2;
+    
+    const dx = x - xc;
+    const dy = y - yc;
+    
+    // Rotate elements based on hover coordinates
+    const angleX = -(dy / yc) * 8; 
+    const angleY = (dx / xc) * 8;
+    
+    // Inner elements parallax translation shifts
+    const imgX = -(dx / xc) * 10;
+    const imgY = -(dy / yc) * 10;
+    const glowX = (dx / xc) * 15;
+    const glowY = (dy / yc) * 15;
+    
+    gsap.to(wrapper, {
+      rotateX: angleX,
+      rotateY: angleY,
+      transformPerspective: 1000,
+      ease: 'power3.out',
+      duration: 0.4,
+      overwrite: 'auto'
+    });
+    
+    gsap.to(img, {
+      x: imgX,
+      y: imgY,
+      scale: 1.06,
+      ease: 'power3.out',
+      duration: 0.4,
+      overwrite: 'auto'
+    });
+    
+    gsap.to(glow, {
+      x: glowX,
+      y: glowY,
+      opacity: 1,
+      scale: 1.08,
+      ease: 'power3.out',
+      duration: 0.4,
+      overwrite: 'auto'
+    });
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const wrapper = container.querySelector('.projects__featured-image-wrapper') as HTMLDivElement;
+    const img = container.querySelector('img') as HTMLImageElement;
+    const glow = container.querySelector('.projects__featured-image-glow') as HTMLDivElement;
+    
+    if (!wrapper || !img || !glow) return;
+    
+    gsap.to(wrapper, {
+      rotateX: 0,
+      rotateY: 0,
+      ease: 'power3.out',
+      duration: 0.6,
+      overwrite: 'auto'
+    });
+    
+    gsap.to(img, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      ease: 'power3.out',
+      duration: 0.6,
+      overwrite: 'auto'
+    });
+    
+    gsap.to(glow, {
+      x: 0,
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      ease: 'power3.out',
+      duration: 0.6,
+      overwrite: 'auto'
+    });
+  };
+
   useEffect(() => {
     if (!sectionRef.current) return;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -129,7 +223,11 @@ export default function Projects() {
                 className={`projects__featured-row ${isReverse ? 'projects__featured-row--reverse' : ''}`}
               >
                 {/* Visual Image Showcase */}
-                <div className="projects__featured-image-container">
+                <div 
+                  className="projects__featured-image-container"
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                >
                   <div className="projects__featured-image-glow" />
                   <div className="projects__featured-image-wrapper">
                     <img 
