@@ -6,8 +6,8 @@ import { skillCategories as mockSkills } from '../data/skills';
 import { defaultProfile } from '../data/profile';
 
 // Check if Sanity is configured via environment variables
-const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || '';
-const dataset = import.meta.env.VITE_SANITY_DATASET || 'production';
+const projectId = (import.meta.env.VITE_SANITY_PROJECT_ID || '').trim();
+const dataset = (import.meta.env.VITE_SANITY_DATASET || 'production').trim();
 const apiVersion = '2026-05-23';
 
 export const isSanityConfigured = projectId !== '';
