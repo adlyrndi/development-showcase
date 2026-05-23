@@ -3,6 +3,7 @@ import imageUrlBuilder from '@sanity/image-url';
 import { projects as mockProjects } from '../data/projects';
 import { experiences as mockExperiences } from '../data/experience';
 import { skillCategories as mockSkills } from '../data/skills';
+import { defaultProfile } from '../data/profile';
 
 // Check if Sanity is configured via environment variables
 const projectId = import.meta.env.VITE_SANITY_PROJECT_ID || '';
@@ -111,5 +112,36 @@ export async function getSkills() {
   } catch (error) {
     console.error('Error fetching skills from Sanity, falling back:', error);
     return mockSkills;
+  }
+}
+
+/* ==========================================================================
+   4. PROFILE API FETCH WITH OFFLINE FALLBACK
+   ========================================================================== */
+export async function getProfile() {
+  if (!sanityClient) {
+    console.warn('Sanity is not configured. Falling back to local profile data.');
+    return defaultProfile;
+  }
+
+  try {
+    const query = `*[_type == "profile"][0] {
+      name,
+      roles,
+      heroTitle,
+      heroSubtitle,
+      aboutTitle,
+      aboutText,
+      "aboutImage": aboutImage.asset->url,
+      cvUrl,
+      email,
+      githubUrl,
+      linkedinUrl
+    }`;
+    const data = await sanityClient.fetch(query);
+    return data ? { ...defaultProfile, ...data } : defaultProfile;
+  } catch (error) {
+    console.error('Error fetching profile from Sanity, falling back:', error);
+    return defaultProfile;
   }
 }

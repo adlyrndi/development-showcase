@@ -1,7 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger } from '../../hooks/useGsap';
 import { scrollTo } from '../../hooks/useLenis';
 import { ArrowDown, Github, Linkedin } from 'lucide-react';
+import { defaultProfile } from '../../data/profile';
+import { getProfile } from '../../utils/sanity';
 import './Hero.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,7 +17,17 @@ export default function Hero() {
   const orbsRef = useRef<HTMLDivElement>(null);
   const roleRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
-  const roles = ['Software Engineer', 'Fullstack Developer', 'Mobile Developer'];
+  const [profile, setProfile] = useState(defaultProfile);
+
+  useEffect(() => {
+    async function loadProfile() {
+      const data = await getProfile();
+      setProfile(data);
+    }
+    loadProfile();
+  }, []);
+
+  const roles = profile.roles;
 
   // Role text rotation — all roles are stacked via CSS grid,
   // so container width = widest text. Zero layout shift.
@@ -47,7 +59,7 @@ export default function Hero() {
     }, 3200);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [roles]);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -151,11 +163,11 @@ export default function Hero() {
       <div className="container hero__content">
         <p className="hero__greeting mono">
           <span className="hero__greeting-line" />
-          Hello, I'm
+          {profile.heroTitle}
         </p>
 
         <h1 className="hero__title" ref={titleRef}>
-          {splitText('Adly Renadi')}
+          {splitText(profile.name)}
         </h1>
 
         <p className="hero__subtitle" ref={subtitleRef}>
@@ -171,7 +183,7 @@ export default function Hero() {
               </span>
             ))}
           </span>{' '}
-          who builds performant web apps &amp; trading systems with modern technologies.
+          {profile.heroSubtitle}
         </p>
 
         <div className="hero__cta" ref={ctaRef}>
@@ -191,12 +203,16 @@ export default function Hero() {
             Contact Me
           </button>
           <div className="hero__social">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="GitHub">
-              <Github size={20} />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="LinkedIn">
-              <Linkedin size={20} />
-            </a>
+            {profile.githubUrl && (
+              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="GitHub">
+                <Github size={20} />
+              </a>
+            )}
+            {profile.linkedinUrl && (
+              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="hero__social-link" aria-label="LinkedIn">
+                <Linkedin size={20} />
+              </a>
+            )}
           </div>
         </div>
       </div>
