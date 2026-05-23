@@ -105,10 +105,12 @@ export default function About() {
         <div className="about__grid">
           <div className="about__image-wrapper">
             <div className="about__image-frame glass-card">
-              <div className="about__image-placeholder">
-                <Code2 size={64} strokeWidth={1} />
-                <span>Your Photo</span>
-              </div>
+              <img 
+                src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80" 
+                alt="Adly Renadi profile portrait" 
+                className="about__image"
+                loading="lazy"
+              />
             </div>
             <div className="about__image-accent" />
           </div>
